@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Data (never commit raw or derived datasets)
+data/raw/
+data/processed/
+
+# Model artifacts and experiment outputs
+models/
+reports/experiments/
+*.pt
+*.pth
+*.onnx
+*.ckpt
+
+# Logs
+*.log
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Coverage / tooling caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
