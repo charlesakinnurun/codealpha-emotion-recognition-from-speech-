@@ -1,0 +1,16 @@
+data:
+  # Root directory containing RAVDESS "Actor_XX/" subfolders.
+  # Relative to this file's directory (configs/), hence the ../ prefix.
+  data_dir: ../data/raw/ravdess
+  # Where metadata.csv and quarantine.csv are written.
+  output_dir: ../data/processed
+  # Keep audio-only (03) speech (01) utterances.
+  modality: "03"
+  vocal_channel: "01"
+  # Sanity bounds on utterance length.
+  min_duration_s: 0.5
+  max_duration_s: 30.0
+  # Speaker proportions for train / val / test. Sums to 1.
+  split_ratios: [0.667, 0.166, 0.167]
+  # Deterministic speaker-level split.
+  seed: 42
