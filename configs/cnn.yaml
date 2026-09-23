@@ -1,0 +1,46 @@
+# CNN (log-Mel) training configuration.
+#
+# Paths are resolved relative to this file's directory. The `training:` block
+# maps onto TrainConfig fields; `features:` onto FeatureConfig; `model:` is
+# passed through to the model factory. Identical settings must be reused by
+# the inference/serving pipeline to avoid training/serving skew.
+seed: 42
+metadata: ../data/processed/metadata.csv
+output_dir: ../reports/experiments
+
+# FeatureConfig fields (see src/emotion_recognition/features/extractor.py).
+# Deep models consume log_mel (1, n_mels, n_frames) tensors; the pooled-vector
+# fields below are kept for parity with configs/baseline.yaml but unused here.
+features:
+  target_sr: 16000
+  duration_s: 4.0
+  n_fft: 1024
+  hop_length: 256
+  n_mels: 64
+  fmax: 8000.0
+  n_mfcc: 40
+  delta_width: 9
+  f0_min: 75.0
+  f0_max: 400.0
+  rolloff_percent: 0.85
+  normalize_rms: false
+  pool_stats: [mean, std]
+  pool_groups: [mfcc, delta, delta2, spectral, prosodic]
+
+model:
+  kind: cnn                # reserved for Phase 6 (crnn -> cnn_lstm)
+  conv_channels: [32, 64, 128]
+  kernel_size: 3
+  dropout: [0.2, 0.3, 0.4]
+  num_classes: 8
+
+training:
+  batch_size: 32
+  epochs: 50
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  patience: 10
+  min_delta: 1.0e-4
+  num_workers: 0
+  device: auto
+  amp: auto
