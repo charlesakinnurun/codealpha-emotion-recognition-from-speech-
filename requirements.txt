@@ -1,0 +1,26 @@
+# Core runtime dependencies for the emotion-recognition project.
+# Python >= 3.11 recommended (CI/dev run on 3.13).
+
+numpy>=1.26
+pandas>=2.2
+scipy>=1.12   # used for scipy.fft (DCT in MFCC); .signal/.interpolate are avoided
+soundfile>=0.12
+# Spectral DSP (STFT, mel filterbank, log-Mel, MFCC, resampling) is implemented
+# in `src/emotion_recognition/features/dsp.py` with NumPy (+ scipy.fft) on
+# purpose: `librosa`->`numba` and `scipy.signal` bundle compiled extensions
+# that OS application-control policies can block on some Windows hosts.
+scikit-learn>=1.4   # classical baselines (soft-skipped by tests when blocked)
+matplotlib>=3.8
+seaborn>=0.13
+PyYAML>=6.0
+
+# Deep learning
+torch>=2.2
+torchaudio>=2.2
+
+# API + demo
+fastapi>=0.110
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+pydantic>=2.6
+streamlit>=1.32
